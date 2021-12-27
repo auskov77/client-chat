@@ -21,9 +21,18 @@ public class ClientServiceImpl implements ClientService {
             MessageInputService messageInputService =
                     new MessageInputServiceImpl(System.in);
 
-            System.out.println("Введите сообщение");
+            System.out.println("Введите свой логин:");
+            String login = messageInputService.getMessage();
+
+            System.out.println("Введите свой пароль:");
+            String password = messageInputService.getMessage();
+
+            // !autho!login:password
+            serverWriter.println("!autho!" + login + ":" + password);
+            serverWriter.flush();
 
             while (!isExit) {
+//                System.out.println("Введите сообщение");
                 String consoleMessage = messageInputService.getMessage();
                 // 2. В клиенте сделать выход из цикла по слову "Exit"
                 isExit = consoleMessage.equals("Exit");
@@ -37,4 +46,5 @@ public class ClientServiceImpl implements ClientService {
             }
         }
     }
+
 }
